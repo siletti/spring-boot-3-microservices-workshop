@@ -2,7 +2,6 @@ package com.example.movieinfoservice.models;
 
 import lombok.Builder;
 
-
 @Builder
-public record Movie(String movieId, String name, String description) {
+public record MovieSummary(String id, String title, String overview) {
 }

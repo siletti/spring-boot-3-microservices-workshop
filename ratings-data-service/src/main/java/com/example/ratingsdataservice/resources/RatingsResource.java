@@ -21,8 +21,8 @@ public class RatingsResource {
     public UserRating getUserRatings(@PathVariable String userId) {
         return UserRating.builder()
                 .userRating(List.of(
-                        Rating.builder().movieId("1234").rating(4).build(),
-                        Rating.builder().movieId("5678").rating(3).build()
+                        Rating.builder().movieId("100").rating(4).build(),
+                        Rating.builder().movieId("200").rating(3).build()
                 ))
                 .build();
 

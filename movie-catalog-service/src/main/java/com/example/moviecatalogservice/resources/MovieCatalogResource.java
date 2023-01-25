@@ -35,7 +35,7 @@ public class MovieCatalogResource {
 
             return CatalogItem.builder()
                     .name(movie.name())
-                    .desc("desccccccc")
+                    .desc(movie.description())
                     .rate(rating.rating())
                     .build();
         }).toList();

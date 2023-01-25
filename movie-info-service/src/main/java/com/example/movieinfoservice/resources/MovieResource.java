@@ -2,17 +2,36 @@ package com.example.movieinfoservice.resources;
 
 
 import com.example.movieinfoservice.models.Movie;
+import com.example.movieinfoservice.models.MovieSummary;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 
 @RestController
 @RequestMapping("/movies")
 public class MovieResource {
 
+    private final String apiKey;
+    private final RestTemplate restTemplate;
+
+    public MovieResource(RestTemplate restTemplate, @Value("${api.Key}") String apiKey) {
+        this.restTemplate = restTemplate;
+        this.apiKey = apiKey;
+    }
+
     @RequestMapping("/{movieId}")
     public Movie getMovieInfo(@PathVariable String movieId) {
-        return Movie.builder().movieId(movieId).name("movieName" + movieId).build();
+
+        MovieSummary movieSummary = restTemplate.getForObject(
+                "https://api.themoviedb.org/3/movie/" + movieId + "?api_key=" + apiKey,
+                MovieSummary.class);
+        return Movie.builder()
+                .movieId(movieId)
+                .name(movieSummary.title())
+                .description(movieSummary.overview())
+                .build();
     }
 
 }

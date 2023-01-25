@@ -4,5 +4,5 @@ import lombok.Builder;
 
 
 @Builder
-public record Movie(String movieId, String name) {
+public record Movie(String movieId, String name, String description) {
 }
