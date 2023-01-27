@@ -5,5 +5,5 @@ import lombok.Builder;
 import java.util.List;
 
 @Builder
-public record UserRating(List<Rating> userRating) {
+public record UserRating(String userId, List<Rating> userRating) {
 }
