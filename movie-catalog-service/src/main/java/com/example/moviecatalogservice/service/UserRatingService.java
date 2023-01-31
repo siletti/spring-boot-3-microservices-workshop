@@ -17,7 +17,6 @@ public class UserRatingService {
 
     @CircuitBreaker(name = "myProjectAllRemoteCallsCB", fallbackMethod = "getUserRatingFallback")
     @Bulkhead(name = "userRatingService", fallbackMethod = "getCatalogItemFallback")
-
     public UserRating getUserRating(String userId) {
         return restTemplate.getForObject("http://ratings-data-service/ratingsdata/users/" + userId, UserRating.class);
     }
